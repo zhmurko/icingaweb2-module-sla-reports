@@ -14,7 +14,7 @@ use Icinga\Module\Monitoring\Object\Host;
 <div class="content">
 
 
-    <h1>Boxy Dashboard</h1>
+    <h1>SLA Reports</h1>
     <div style="float:right">
         <div class="legend unknown-ack" >unknown</div>
         <div class="legend critical-ack" >critical</div>
@@ -31,45 +31,21 @@ use Icinga\Module\Monitoring\Object\Host;
         <div class="legendtext">&#10004; = Acknowledged</div>
         <div class="legendtext">&#8986; = In Downtime</div>
     </div>
-<h2>Host Info</h2>
-<? 
-foreach ($this->hosts as $host){ 
-    $title = htmlspecialchars($host->{'host_display_name'});
-    $size=16;
-    $content="&nbsp;";
-    $returncode=$host->{'host_state_text'};
-    if ($host->{'host_acknowledged'}==1 ){
-        $returncode.="-ack";
-        $content= "&#10004;";
-        $title.=" (Acknowledged)";
-    }?>
-    <a href='/monitoring/host/show?host=<?=$host->{'host_name'}?>' class='box state <?=$returncode?>' style='width:<?=$size?>px; height:<?=$size?>px; font-size:<?=$size?>px;' title="<?=$title?>"><?=$content?></a>
-<? } ?>
 
+<h2>SLA Report</h2>
+     <div>
+
+<?php
+
+function prettyPrint ($arr) {
+  echo '<pre><code>';
+  print_r($arr);
+  echo '</code></pre>';
+}
+ 
+  foreach ($this->recentAlerts as $alert) {
+      ?>
+    <li><?php prettyPrint($alert); ?></li>
+<?php } ?>
+      </div>
 <br clear="all"/>
-<h2>Service Info</h2>
-
-<? foreach ($this->services as $service){ 
-    $title = $service->{'host_name'}.": ".$service->{'service_description'};
-    $size=16;
-    $content="&nbsp;";
-    $returncode=$service->{'service_state_text'};
-    if ($service->{'service_in_downtime'}==1 or $service->{'host_in_downtime'}==1 ){
-        $returncode.="-downtime";
-        $content= "&#8986;";
-        $title.=" (Scheduled Maintenance)";
-    }elseif ($service->{'service_acknowledged'}==1 ){
-        $returncode.="-ack";
-        $content= "&#10004;";
-        $title.=" (Acknowledged)";
-    }elseif ($service->{'service_state_text'} != "OK"  && $service->{'host_acknowledged'} == 1 ){
-        $returncode.="-ack";
-        $content= "&#8632;";
-        $title.=" (Host Down and Acknowledged)";
-    }
-    $title=htmlspecialchars($title."\n ".$service->{'service_output'});?>
-    <a href='/monitoring/host/show?host=<?=$host->{'host_name'}?>&service=<?=$service->{'service_description'}?>' class='box state <?=$returncode?>' style='width:<?=$size?>px; height:<?=$size?>px; font-size:<?=$size?>px;' title="<?=$title?>"><?=$content?></a>
-
-<? } ?>
-
-</div>

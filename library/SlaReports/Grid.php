@@ -1,6 +1,6 @@
 <?php
 
-namespace Icinga\Module\BoxyDash;
+namespace Icinga\Module\SlaReports;
 
 use Icinga\Application\Config;
 use Icinga\Exception\ConfigurationError;
@@ -16,11 +16,11 @@ class Grid extends WebBaseHook
 
 
 
-    protected $baseUrl = '/boxydash';
+    protected $baseUrl = '/reports/sla';
 
     protected function init()
     {
-        $cfg = Config::module('boxydash')->getSection('boxydash');
+        $cfg = Config::module('sla-reports')->getSection('sla-reports');
         $this->baseUrl   = rtrim($cfg->get('base_url', $this->baseUrl), '/');
     }
 

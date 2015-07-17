@@ -1,8 +1,7 @@
 <?php
 
-$section = $this->menuSection('Boxy Dashboard', array(
-    'url' => 'boxydash',
-    'icon'  => 'dashboard',
-    'priority'  => 20
-));
-
+$section = $this->menuSection($this->translate('Reporting'))
+    ->add($this->translate('SLA Reports'), array(
+          'icon'  => 'dashboard',
+          'priority'  => 120))
+    ->setUrl('sla-reports');

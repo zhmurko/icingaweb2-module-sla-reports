@@ -1,4 +1,5 @@
-Module: BoxyDash
+Module: SLA Reports
 Version: 0.0.1
-Description: Boxy Dashboard module
-This is intended to give you another view of the status of your board.
+Depends: monitoring
+Description: Service Level Agreement module
+ This is intended to give you the SLA reports

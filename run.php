@@ -1,4 +1,4 @@
 <?php
 
-$this->registerHook('boxdash', '\\Icinga\\Module\\BoxyDash');
+$this->registerHook('sla-reports', '\\Icinga\\Module\\SlaReports');
 

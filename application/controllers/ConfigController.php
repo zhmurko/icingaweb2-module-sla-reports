@@ -2,7 +2,7 @@
 
 use Icinga\Web\Controller;
 
-class BoxyDash_ConfigController extends Controller
+class SlaReports_ConfigController extends Controller
 {
     public function indexAction()
     {
@@ -16,14 +16,14 @@ class BoxyDash_ConfigController extends Controller
             'dashboard',
             array(
                 'title' => 'Dashboard',
-                'url'   => 'boxydash'
+                'url'   => 'sla-reports'
             )
         );
         $tabs->add(
             'config',
             array(
                 'title' => 'Configure',
-                'url'   => 'boxydash/config'
+                'url'   => 'sla-reports/config'
             )
         );
 
